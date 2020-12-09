@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    const items = new WeakMap();
+    class Stack {
+        constructor() {
+            items.set(this, []);
+            this.count = 0;
+        }
+        push(element) {
+            const s = items.get(this);
+            s.push(element);
+            this.count++;
+        }
+        pop() {
+            const s = items.get(this);
+            const r = s.pop();
+            this.count--;
+            return r;
+        }
+        isEmpty() {
+            return this.count === 0;
+        }
+    }
+
+    function decimalToBinary(decNumber) {
+        const remStack = new Stack();
+        let num = decNumber;
+        let rem;
+        let binaryString = '';
+        while (num > 0) {
+            rem = Math.floor(num % 2)
+            remStack.push(rem);
+            num = Math.floor(num / 2)
+        }
+        while (!remStack.isEmpty()) {
+            binaryString += remStack.pop().toString();
+        }
+        return binaryString;
+    }
+    console.log(decimalToBinary(283409))
+</script>
