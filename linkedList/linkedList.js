@@ -8,7 +8,7 @@ class LinkedList {
         this.equalsFn = equalsFn;
     }
     push(element) {
-        const node = new Node(element);
+        let node = new Node(element);
         let current;
         if (this.head == null) {
             this.head = node;
@@ -20,6 +20,45 @@ class LinkedList {
             current.next = node;
         }
         this.count++;
+    }
+    insert(node, index) {
+
+    }
+    removeAt(index) {
+        if (index >= 0 && index < this.count) {
+            let current = head;
+            if (index === 0) {
+                this.head = current.next;
+            } else {
+                let previous;
+                for (let i = 0; i < index; i++) {
+                    previous = current;
+                    current = current.next;
+                }
+                previous.next = current.next;
+            }
+            this.count--;
+            return current.element;
+        }
+        return undefined;
+    }
+    getElementAt(index) {
+
+    }
+    remove() {
+
+    }
+    indexOf() {
+
+    }
+    size() {
+
+    }
+    isEmpty() {
+
+    }
+    toString() {
+
     }
 }
 const list = new LinkedList();
