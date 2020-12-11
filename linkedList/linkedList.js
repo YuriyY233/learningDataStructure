@@ -21,8 +21,22 @@ class LinkedList {
         }
         this.count++;
     }
-    insert(node, index) {
-
+    insert(element, index) {
+        if (index >= 0 && index <= this.count) {
+            const node = new Node(element);
+            if (index === 0) {
+                let temp = this.head;
+                node.next = temp;
+                this.head = node;
+            } else {
+                let previous = this.getElementAt(index - 1);
+                previous.next = node;
+                node.next = previous.next;
+            }
+            this.count++;
+            return true
+        }
+        return false;
     }
     removeAt(index) {
         if (index >= 0 && index < this.count) {
@@ -43,29 +57,62 @@ class LinkedList {
         return undefined;
     }
     getElementAt(index) {
-
+        if (index >= 0 && index <= this.count) {
+            let current = this.head;
+            for (let i = 0; i < index && current != null; i++) {
+                current = current.next;
+            }
+            return current;
+        }
+        return undefined;
     }
-    remove() {
-
+    remove(index) {
+        if (index == 0) {
+            let current = this.head;
+            this.head = current.next;
+        } else {
+            const previous = this.getElementAt(index - 1);
+            const current = this.getElementAt(index);
+            previous.next = current.next;
+        }
+        this.count--;
     }
-    indexOf() {
-
+    indexOf(element) {
+        let current = this.head;
+        for (let i = 0; i < this.count && current != null; i++) {
+            if (this.equalsFn(current.element, element)) {
+                return i;
+            }
+            current = current.next;
+        }
+        return -1;
     }
     size() {
-
+        return this.count;
     }
     isEmpty() {
-
+        return this.size() === 0;
     }
     toString() {
-
+        if (this.head == null) {
+            return ''
+        }
+        let objString = `${this.head.element}`;
+        let current = this.head.next;
+        for (let i = 0; i < this.count && current != null; i++) {
+            objString = `${objString},${current.element}`
+            current = current.next;
+        }
+        return objString;
     }
 }
-const list = new LinkedList();
-list.push(14);
-list.push(10);
-list.push(18);
-list.push(20)
-list.push(30)
-list.push(40)
-console.log(list.head.next.next.next);
+// const list = new LinkedList();
+// list.push(14);
+// list.push(10);
+// list.push(18);
+// list.push(20)
+// list.push(30)
+// list.push(40)
+// console.log(list.indexOf(18));
+
+module.exports = LinkedList;
