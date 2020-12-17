@@ -44,4 +44,29 @@ class DoublyLinkedList extends LinkedList {
         }
         return false;
     }
+    removeAt(index) {
+        if (index >= 0 && index <= this.count) {
+            let current = this.head;
+            if (index === 0) {
+                this.head = current.next;
+                if (this.count === 1) {
+                    this.tail = undefined;
+                } else {
+                    this.head.prev = undefined
+                }
+            } else if (index === this.count - 1) {
+                current = this.tail;
+                this.tail = current.prev;
+                this.tail.next = undefined;
+            } else {
+                let prev = this.getElementAt(index - 1);
+                current = prev.next;
+                prev.next = current.next;
+                current.next.prev = pre;
+            }
+            this.count--;
+            return current.element;
+        }
+        return undefined;
+    }
 }

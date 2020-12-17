@@ -106,9 +106,9 @@ class LinkedList {
         return objString;
     }
 }
-// const list = new LinkedList();
-// list.push(14);
-// list.push(10);
+const list = new LinkedList();
+list.push(14);
+list.push(10);
 // list.push(18);
 // list.push(20)
 // list.push(30)
